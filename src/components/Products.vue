@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 import Product from './Product.vue';
 
 export default {
@@ -20,20 +20,11 @@ export default {
   components: {
     Product,
   },
-  data() {
-    return {
-      products: [],
-    };
+  computed: mapGetters(['products']),
+  mounted() {
+    this.fetchProducts();
   },
-  async mounted() {
-    try {
-      const { data: { data } } = await axios.get('api/products');
-
-      this.products = data;
-    } catch (e) {
-      console.warn('catched', e.response);
-    }
-  },
+  methods: mapActions(['fetchProducts']),
 };
 </script>
 
