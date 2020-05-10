@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Product',
   props: {
@@ -31,8 +33,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['add']),
     buy() {
-      alert(`Вы купили ${this.product.name}`);
+      this.add({ productId: this.product.id });
     },
   },
 };
