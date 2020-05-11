@@ -9,15 +9,15 @@ export default {
     cartProducts: (state) => state.products,
   },
   actions: {
-    add({ commit }, { productId, quantity = 1 }) {
-      commit('ADD_TO_CART', { productId, quantity });
+    add({ commit }, productId) {
+      commit('ADD_TO_CART', productId);
     },
   },
   mutations: {
-    ADD_TO_CART(state, { productId, quantity }) {
+    ADD_TO_CART(state, productId) {
       state.products = {
         ...state.products,
-        [productId]: quantity,
+        [productId]: state.products[productId] ? state.products[productId] + 1 : 1,
       };
     },
   },

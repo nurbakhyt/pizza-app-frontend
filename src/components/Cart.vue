@@ -14,6 +14,13 @@
         <div class="cart-product__quantity">
           {{ quantity }}
         </div>
+
+        <button
+          class="cart-product__btn cart-product__btn--add"
+          @click="add(productId)"
+        >
+          +
+        </button>
       </div>
     </div>
 
@@ -21,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Cart',
@@ -29,6 +36,7 @@ export default {
     'cartProducts',
     'productsById',
   ]),
+  methods: mapActions(['add']),
 };
 </script>
 

@@ -69,4 +69,15 @@ describe('Cart.vue', () => {
     expect(wrapper.findAll('.cart-product__name').at(1).text()).toContain(stateProducts.byId[2].name)
     expect(wrapper.findAll('.cart-product__quantity').at(1).text()).toContain(stateCart.products[2])
   });
+
+  it ('adds another one of existing products', () => {
+    const wrapper = shallowMount(Cart, {
+      store,
+      localVue,
+    });
+
+    wrapper.find('.cart-product__btn--add').trigger('click');
+
+    expect(actions.add).toHaveBeenCalled();
+  });
 });

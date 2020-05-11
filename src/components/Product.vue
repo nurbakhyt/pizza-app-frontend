@@ -35,7 +35,7 @@ export default {
   methods: {
     ...mapActions(['add']),
     buy() {
-      this.add({ productId: this.product.id });
+      this.add(this.product.id);
     },
   },
 };
