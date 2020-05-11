@@ -1,8 +1,13 @@
 export default {
   state: {
-    products: {},
+    products: {
+      1: 4,
+      3: 2,
+    },
   },
-  getters: {},
+  getters: {
+    cartProducts: (state) => state.products,
+  },
   actions: {
     add({ commit }, { productId, quantity = 1 }) {
       commit('ADD_TO_CART', { productId, quantity });
