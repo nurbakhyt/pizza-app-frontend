@@ -12,20 +12,21 @@ describe('Products.vue', () => {
 
   beforeEach(() => {
     state = {
-      items: [
-        {
+      ids: [1 ,2],
+      byId: {
+        1: {
           id: 1,
           name: 'product 1',
           price: 5.43,
           description: 'description 1',
         },
-        {
+        2: {
           id: 2,
           name: 'product 2',
           price: 5,
           description: 'description 2',
         },
-      ],
+      },
     };
 
     actions = {
@@ -52,6 +53,6 @@ describe('Products.vue', () => {
   it('presents the loaded products', () => {
     const wrapper = mount(Products, { store, localVue });
 
-    expect(wrapper.findAll(Product)).toHaveLength(state.items.length);
+    expect(wrapper.findAll(Product)).toHaveLength(state.ids.length);
   });
 });

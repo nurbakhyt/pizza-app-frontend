@@ -3,9 +3,9 @@
     <h3 class="products-list__header">Menu</h3>
 
     <product
-      v-for="product in products"
-      :key="product.name"
-      :product="product"
+      v-for="id in productsIds"
+      :key="id"
+      :product="productsById[id]"
       class="products-list__item"
     />
   </section>
@@ -20,7 +20,10 @@ export default {
   components: {
     Product,
   },
-  computed: mapGetters(['products']),
+  computed: mapGetters([
+    'productsIds',
+    'productsById',
+  ]),
   mounted() {
     this.fetchProducts();
   },
