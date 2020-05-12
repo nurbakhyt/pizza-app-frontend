@@ -43,10 +43,10 @@
       </div>
 
       <div
-        v-if="isEmpty"
+        v-if="isCartFree"
         class="cart-alert"
       >
-        Your basket is empty
+        There are no pizzas in the cart
       </div>
     </div>
 
@@ -58,15 +58,11 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Cart',
-  computed: {
-    ...mapGetters([
-      'cartProducts',
-      'productsById',
-    ]),
-    isEmpty() {
-      return Object.keys(this.cartProducts).length < 1;
-    },
-  },
+  computed: mapGetters([
+    'cartProducts',
+    'productsById',
+    'isCartFree',
+  ]),
   methods: mapActions([
     'add',
     'reduce',
@@ -117,6 +113,7 @@ $red: #b05656
     cursor: pointer
     font-size: 1rem
     line-height: 1.5rem
+    outline: none
     padding: 0
     height: 1.5rem
     width: 2rem

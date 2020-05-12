@@ -4,6 +4,15 @@ export default {
   },
   getters: {
     cartProducts: (state) => state.products,
+    isCartFree: (state) => Object.keys(state.products).length < 1,
+    cartProductsArray: (state) => Object.keys(state.products)
+      .reduce((arr, key) => ([
+        ...arr,
+        {
+          id: key,
+          quantity: state.products[key],
+        },
+      ]), []),
   },
   actions: {
     add({ commit, getters: { cartProducts } }, productId) {
