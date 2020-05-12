@@ -1,5 +1,5 @@
 # pizza-app
-[Link to the demo app](https://dry-dawn-58890.herokuapp.com/)
+[Link to the demo app](https://pizza-beaver-bf1837.netlify.app/)
 
 ## Project setup
 ```
