@@ -1,6 +1,10 @@
+import axios from 'axios';
+
 export default {
   state: {
+    deliveryCost: 5,
     products: {},
+    orders: [],
   },
   getters: {
     cartProducts: (state) => state.products,
@@ -13,6 +17,8 @@ export default {
           quantity: state.products[key],
         },
       ]), []),
+    orders: (state) => state.orders,
+    deliveryCost: (state) => state.deliveryCost,
   },
   actions: {
     add({ commit, getters: { cartProducts } }, productId) {
@@ -31,6 +37,15 @@ export default {
     },
     remove({ commit }, productId) {
       commit('REMOVE_THE_PRODUCT', productId);
+    },
+    async order({ commit }, orderData) {
+      try {
+        const { data: { order } } = await axios.post('/api/orders', orderData);
+
+        commit('ORDER_SUCCESSFULLY', order);
+      } catch (e) {
+        console.warn(e.response);
+      }
     },
   },
   mutations: {
@@ -59,6 +74,12 @@ export default {
           ...obj,
           [id]: state.products[id],
         }), {});
+    },
+    ORDER_SUCCESSFULLY(state, order) {
+      state.orders = [
+        ...state.orders,
+        order,
+      ];
     },
   },
 };

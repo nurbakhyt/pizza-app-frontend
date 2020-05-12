@@ -4,7 +4,7 @@
 
     <form
       class="delivery__form"
-      @submit.prevent
+      @submit.prevent="submit"
     >
       <legend>Fill the form, please</legend>
 
@@ -57,13 +57,45 @@
       </div>
 
       <ul class="list">
-        <li class="list__item">
-          <span>Nunquam carpseris equiso. Nunquam carpseris equiso.</span>
-          <span class="list__price">5.99 $</span>
+        <li
+          v-for="(value, key, idx) in cartProducts"
+          :key="key"
+          class="list__item"
+        >
+          <span>
+            {{ idx + 1 }})
+            {{ productsById[key].name }}
+          </span>
+          <span class="list__price">
+            {{ value }}
+            x
+            {{ productsById[key].price }}$
+          </span>
         </li>
+
+        <li
+          v-if="isCartFree"
+          class="list__item"
+        >
+          Cart is empty. Please, add pizza you like to the cart.
+        </li>
+
+        <template v-else>
+          <hr>
+          <li class="list__item">
+            <span>Delivery:</span>
+            <span class="list__price">{{ deliveryCost }}$</span>
+          </li>
+
+          <li class="list__item">
+            <span>Total:</span>
+            <span class="list__price">{{ total }}$</span>
+          </li>
+        </template>
       </ul>
 
       <button
+        :disabled="!isFilled"
         type="submit"
         class="delivery__btn"
       >
@@ -74,6 +106,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'Delivery',
   data() {
@@ -83,12 +117,47 @@ export default {
       address: '',
     };
   },
+  computed: {
+    ...mapGetters([
+      'cartProducts',
+      'productsById',
+      'isCartFree',
+      'cartProductsArray',
+      'deliveryCost',
+    ]),
+    isFilled() {
+      return !this.isCartFree
+        && !!this.username
+        && !!this.phone
+        && !!this.address;
+    },
+    total() {
+      return this.deliveryCost + Object.keys(this.cartProducts)
+        .reduce((total, key) => (total + this.cartProducts[key] * this.productsById[key].price), 0);
+    },
+  },
+  methods: {
+    ...mapActions(['order']),
+    async submit() {
+      await this.order({
+        ...this.$data,
+        products: this.cartProductsArray,
+      });
+    },
+  },
 };
 </script>
 
 <style lang="sass">
 @import "~@/assets/styles/vars"
 $input-color: lighten($secondary-color, 40)
+
+hr
+  margin-bottom: 1rem
+
+button[disabled]
+  background-color: lighten($brand-color, 40)
+  pointer-events: none
 
 .delivery
   flex: 1 1 auto
@@ -121,7 +190,7 @@ legend
     display: flex
     justify-content: space-between
     font-style: italic
-    font-size: .875rem
+    font-size: .75rem
     font-weight: 400
     margin-bottom: 1rem
 
