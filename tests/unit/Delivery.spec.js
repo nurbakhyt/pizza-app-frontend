@@ -41,6 +41,7 @@ describe('Delivery.vue', () => {
             quantity: cartProducts[key],
           },
         ]), []),
+      deliveryCost: () => 5,
     };
 
     actions = {
