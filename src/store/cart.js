@@ -1,16 +1,17 @@
 export default {
   state: {
-    products: {
-      1: 4,
-      3: 2,
-    },
+    products: {},
   },
   getters: {
     cartProducts: (state) => state.products,
   },
   actions: {
-    add({ commit }, productId) {
-      commit('ADD_TO_CART', productId);
+    add({ commit, getters: { cartProducts } }, productId) {
+      if (cartProducts[productId]) {
+        commit('ADD_ONE_MORE', productId);
+      } else {
+        commit('ADD_TO_CART', productId);
+      }
     },
     reduce({ commit, getters: { cartProducts } }, productId) {
       if (cartProducts[productId] > 1) {
@@ -25,6 +26,12 @@ export default {
   },
   mutations: {
     ADD_TO_CART(state, productId) {
+      state.products = {
+        ...state.products,
+        [productId]: 1,
+      };
+    },
+    ADD_ONE_MORE(state, productId) {
       state.products = {
         ...state.products,
         [productId]: state.products[productId] + 1,
