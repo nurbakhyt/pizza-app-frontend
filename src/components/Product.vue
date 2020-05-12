@@ -13,16 +13,22 @@
       class="product__btn"
       @click="buy"
     >
-      Add to cart
-      <span class="product__price">
-        USD {{ product.price }}
-      </span>
+      <template v-if="cartProducts[product.id]">
+        Add + 1
+        ({{ cartProducts[product.id] }})
+      </template>
+      <template v-else>
+        Add to cart
+        <span class="product__price">
+          USD {{ product.price }}
+        </span>
+      </template>
     </button>
   </article>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Product',
@@ -32,6 +38,7 @@ export default {
       required: true,
     },
   },
+  computed: mapGetters(['cartProducts']),
   methods: {
     ...mapActions(['add']),
     buy() {
