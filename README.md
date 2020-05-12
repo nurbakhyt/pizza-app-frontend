@@ -7,12 +7,12 @@ npm install
 ```
 
 ### Compiles and hot-reloads for development
+Add environment variable `VUE_APP_API_URL` into .env file
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
-Add environment variable `VUE_APP_API_URL` into .env file
 ```
 npm run build
 ```
