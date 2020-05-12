@@ -11,6 +11,13 @@
           {{ productsById[productId].name }}
         </div>
 
+        <button
+          class="cart-product__btn cart-product__btn--reduce"
+          @click="reduce(productId)"
+        >
+          -
+        </button>
+
         <div class="cart-product__quantity">
           {{ quantity }}
         </div>
@@ -20,6 +27,13 @@
           @click="add(productId)"
         >
           +
+        </button>
+
+        <button
+          class="cart-product__btn cart-product__btn--remove"
+          @click="remove(productId)"
+        >
+          x
         </button>
       </div>
     </div>
@@ -36,7 +50,11 @@ export default {
     'cartProducts',
     'productsById',
   ]),
-  methods: mapActions(['add']),
+  methods: mapActions([
+    'add',
+    'reduce',
+    'remove',
+  ]),
 };
 </script>
 

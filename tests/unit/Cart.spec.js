@@ -8,11 +8,13 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('Cart.vue', () => {
-  let getters, actions, store, stateCart, stateProducts;
+  let wrapper, actions, store, stateCart, stateProducts;
 
   beforeEach(() => {
     actions = {
       add: jest.fn(),
+      reduce: jest.fn(),
+      remove: jest.fn(),
     };
 
     stateCart = {
@@ -53,14 +55,14 @@ describe('Cart.vue', () => {
         },
       },
     });
-  });
 
-  it('consists products list (with quantity)', () => {
-    const wrapper = shallowMount(Cart, {
+    wrapper = shallowMount(Cart, {
       store,
       localVue,
     });
+  });
 
+  it('consists products list (with quantity)', () => {
     expect(wrapper.findAll('.cart-product')).toHaveLength(2)
 
     expect(wrapper.find('.cart-product__name').text()).toContain(stateProducts.byId[1].name)
@@ -70,14 +72,21 @@ describe('Cart.vue', () => {
     expect(wrapper.findAll('.cart-product__quantity').at(1).text()).toContain(stateCart.products[2])
   });
 
-  it ('adds another one of existing products', () => {
-    const wrapper = shallowMount(Cart, {
-      store,
-      localVue,
-    });
-
+  it('adds another one of existing products', () => {
     wrapper.find('.cart-product__btn--add').trigger('click');
 
     expect(actions.add).toHaveBeenCalled();
+  });
+
+  it('reduces the amount of products', () => {
+    wrapper.find('.cart-product__btn--reduce').trigger('click');
+
+    expect(actions.reduce).toHaveBeenCalled();
+  });
+
+  it('removes the product', () => {
+    wrapper.find('.cart-product__btn--remove').trigger('click');
+
+    expect(actions.remove).toHaveBeenCalled();
   });
 });

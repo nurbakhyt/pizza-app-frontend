@@ -1,6 +1,6 @@
 <template>
   <section class="products-list">
-    <h3 class="products-list__header">Menu</h3>
+    <h3>Menu</h3>
 
     <product
       v-for="id in productsIds"
@@ -32,15 +32,15 @@ export default {
 </script>
 
 <style lang="sass">
+h3
+  margin-bottom: 1rem
+  width: 100%
+
 .products-list
   flex: 1 1 auto
   flex-wrap: wrap
   display: flex
   padding: 0 .5rem
-
-  &__header
-    margin-bottom: 1rem
-    width: 100%
 
   &__item
     flex: 1 1 40%
