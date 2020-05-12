@@ -81,6 +81,7 @@ $red: #b05656
 
 .cart-preview
   flex: 0 0 30%
+  align-self: flex-start
   padding: 0 .5rem
   top: 1rem
   position: sticky
