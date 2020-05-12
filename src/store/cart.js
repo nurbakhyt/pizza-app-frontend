@@ -40,9 +40,10 @@ export default {
     },
     async order({ commit }, orderData) {
       try {
-        const { data: { order } } = await axios.post('/api/orders', orderData);
+        const { data: { data } } = await axios.post('/api/orders', orderData);
 
-        commit('ORDER_SUCCESSFULLY', order);
+        commit('ORDER_SUCCESSFULLY', data);
+        commit('RESET_CART');
       } catch (e) {
         console.warn(e.response);
       }
@@ -80,6 +81,9 @@ export default {
         ...state.orders,
         order,
       ];
+    },
+    RESET_CART(state) {
+      state.products = {};
     },
   },
 };

@@ -94,8 +94,15 @@
         </template>
       </ul>
 
+      <div
+        v-if="success"
+        class="alert"
+      >
+        We have accepted your order, we will deliver soon
+      </div>
+
       <button
-        :disabled="!isFilled"
+        :disabled="disableBtn"
         type="submit"
         class="delivery__btn"
       >
@@ -112,9 +119,11 @@ export default {
   name: 'Delivery',
   data() {
     return {
+      loading: false,
       username: '',
       phone: '',
       address: '',
+      success: '',
     };
   },
   computed: {
@@ -131,6 +140,9 @@ export default {
         && !!this.phone
         && !!this.address;
     },
+    disableBtn() {
+      return this.loading || !this.isFilled;
+    },
     total() {
       return this.deliveryCost + Object.keys(this.cartProducts)
         .reduce((total, key) => (total + this.cartProducts[key] * this.productsById[key].price), 0);
@@ -138,11 +150,20 @@ export default {
   },
   methods: {
     ...mapActions(['order']),
-    async submit() {
-      await this.order({
+    submit() {
+      this.order({
         ...this.$data,
         products: this.cartProductsArray,
-      });
+      })
+        .then(() => {
+          this.success = 'We have accepted your order, we will deliver soon.';
+        })
+        .finally(() => {
+          this.username = '';
+          this.phone = '';
+          this.address = '';
+          this.loading = false;
+        });
     },
   },
 };
@@ -219,4 +240,10 @@ legend
 
     &:focus
       border-bottom-color: lighten($secondary-color, 30)
+
+.alert
+  font-size: .75rem
+  font-style: italic
+  color: darken($brand-color, 10)
+  margin-bottom: 1rem
 </style>

@@ -1,8 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VuexPersistence from 'vuex-persist';
 
 import cart from './cart';
 import products from './products';
+
+const vuexLocal = new VuexPersistence({
+  reducer: (state) => ({
+    orders: state.cart.orders,
+  }),
+});
 
 Vue.use(Vuex);
 
@@ -17,4 +24,5 @@ export default new Vuex.Store({
   },
   actions: {
   },
+  plugins: [vuexLocal.plugin],
 });
