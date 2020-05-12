@@ -16,6 +16,14 @@
     >
       Delivery
     </router-link>
+
+    <router-link
+      to="/orders"
+      class="nav__link"
+      active-class="nav__link--active"
+    >
+      My orders
+    </router-link>
   </nav>
 </template>
 

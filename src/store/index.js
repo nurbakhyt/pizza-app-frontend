@@ -6,8 +6,11 @@ import cart from './cart';
 import products from './products';
 
 const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
   reducer: (state) => ({
-    orders: state.cart.orders,
+    cart: {
+      orders: state.cart.orders,
+    },
   }),
 });
 

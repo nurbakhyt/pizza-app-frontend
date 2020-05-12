@@ -17,7 +17,7 @@ export default {
           quantity: state.products[key],
         },
       ]), []),
-    orders: (state) => state.orders,
+    orders: (state) => [...state.orders].reverse(),
     deliveryCost: (state) => state.deliveryCost,
   },
   actions: {
