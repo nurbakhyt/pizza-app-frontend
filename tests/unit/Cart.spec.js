@@ -1,14 +1,18 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Delivery from '@/components/Delivery.vue';
+import Cart from '@/components/Cart.vue';
 import cartModule from '@/store/cart';
 import productsModule from '@/store/products';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('Delivery.vue', () => {
-  let wrapper, actions, store, stateCart, stateProducts;
+describe('Cart.vue', () => {
+  let wrapper;
+  let actions;
+  let store;
+  let stateCart;
+  let stateProducts;
 
   beforeEach(() => {
     actions = {
@@ -56,7 +60,7 @@ describe('Delivery.vue', () => {
       },
     });
 
-    wrapper = shallowMount(Delivery, {
+    wrapper = shallowMount(Cart, {
       store,
       localVue,
     });
@@ -65,11 +69,11 @@ describe('Delivery.vue', () => {
   it('consists products list (with quantity)', () => {
     expect(wrapper.findAll('.cart-product')).toHaveLength(2)
 
-    expect(wrapper.find('.cart-product__name').text()).toContain(stateProducts.byId[1].name)
-    expect(wrapper.find('.cart-product__quantity').text()).toContain(stateCart.products[1])
+    expect(wrapper.find('.cart-product__name').text()).toContain(stateProducts.byId[1].name);
+    expect(wrapper.find('.cart-product__quantity').text()).toContain(stateCart.products[1]);
 
-    expect(wrapper.findAll('.cart-product__name').at(1).text()).toContain(stateProducts.byId[2].name)
-    expect(wrapper.findAll('.cart-product__quantity').at(1).text()).toContain(stateCart.products[2])
+    expect(wrapper.findAll('.cart-product__name').at(1).text()).toContain(stateProducts.byId[2].name);
+    expect(wrapper.findAll('.cart-product__quantity').at(1).text()).toContain(stateCart.products[2]);
   });
 
   it('adds another one of existing products', () => {

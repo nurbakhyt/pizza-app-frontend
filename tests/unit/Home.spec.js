@@ -1,6 +1,6 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Home from '@/components/Home.vue';
+import Home from '@/views/Home.vue';
 import Product from '@/components/Product.vue';
 import productsModule from '@/store/products';
 
@@ -8,11 +8,13 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('Home.vue', () => {
-  let actions, store, state;
+  let actions;
+  let store;
+  let state;
 
   beforeEach(() => {
     state = {
-      ids: [1 ,2],
+      ids: [1, 2],
       byId: {
         1: {
           id: 1,
