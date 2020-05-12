@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Cart from '@/components/Delivery.vue';
-import Navbar from './components/Navbar.vue';
+import Cart from '@/components/Cart.vue';
+import Navbar from '@/components/Navbar.vue';
 
 export default {
   name: 'App',
