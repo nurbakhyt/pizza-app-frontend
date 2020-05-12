@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Cart from '@/components/Cart.vue';
+import Cart from '@/components/Delivery.vue';
 import Navbar from './components/Navbar.vue';
 
 export default {
@@ -55,6 +55,5 @@ body
 main
   flex: 1 1 auto
   display: flex
-  margin-right: -.5rem
-  margin-left: -.5rem
+  padding: 0 .5rem
 </style>

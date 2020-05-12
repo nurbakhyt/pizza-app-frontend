@@ -1,13 +1,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Cart from '@/components/Cart.vue';
+import Delivery from '@/components/Delivery.vue';
 import cartModule from '@/store/cart';
 import productsModule from '@/store/products';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('Cart.vue', () => {
+describe('Delivery.vue', () => {
   let wrapper, actions, store, stateCart, stateProducts;
 
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe('Cart.vue', () => {
       },
     });
 
-    wrapper = shallowMount(Cart, {
+    wrapper = shallowMount(Delivery, {
       store,
       localVue,
     });
