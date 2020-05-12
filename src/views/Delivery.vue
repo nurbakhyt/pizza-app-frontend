@@ -20,6 +20,7 @@
           id="username"
           type="text"
           class="field__input"
+          placeholder="Your name"
         >
       </div>
 
@@ -35,6 +36,7 @@
           id="phone"
           type="text"
           class="field__input"
+          placeholder="Your phone"
         >
       </div>
 
@@ -50,6 +52,7 @@
           id="address"
           type="text"
           class="field__input"
+          placeholder="Your address"
         >
       </div>
 
@@ -85,7 +88,7 @@ export default {
 
 <style lang="sass">
 @import "~@/assets/styles/vars"
-$input-color: lighten($secondary-color, 30)
+$input-color: lighten($secondary-color, 40)
 
 .delivery
   flex: 1 1 auto
@@ -134,13 +137,17 @@ legend
     color: $input-color
     font-size: .75rem
     font-style: italic
+    margin-bottom: .5rem
 
   &__input
     background-color: transparent
     border: none
     border-bottom: 2px solid $input-color
     height: 2rem
+    outline: none
     padding: 0 1rem
     width: 100%
 
+    &:focus
+      border-bottom-color: lighten($secondary-color, 30)
 </style>

@@ -14,7 +14,7 @@
       class="nav__link"
       active-class="nav__link--active"
     >
-      Cart
+      Delivery
     </router-link>
   </nav>
 </template>
