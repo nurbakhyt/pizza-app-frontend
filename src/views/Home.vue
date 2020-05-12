@@ -1,27 +1,47 @@
 <template>
-  <main>
-    <products/>
+  <section class="products-list">
+    <h3>Menu</h3>
 
-    <cart/>
-  </main>
+    <product
+      v-for="id in productsIds"
+      :key="id"
+      :product="productsById[id]"
+      class="products-list__item"
+    />
+  </section>
 </template>
 
 <script>
-import Products from '@/components/Products.vue';
-import Cart from '@/components/Cart.vue';
+import { mapActions, mapGetters } from 'vuex';
+import Product from '@/components/Product.vue';
 
 export default {
-  name: 'Home',
+  name: 'Products',
   components: {
-    Products,
-    Cart,
+    Product,
   },
+  computed: mapGetters([
+    'productsIds',
+    'productsById',
+  ]),
+  mounted() {
+    this.fetchProducts();
+  },
+  methods: mapActions(['fetchProducts']),
 };
 </script>
 
 <style lang="sass">
-main
+h3
+  margin-bottom: 1rem
+  width: 100%
+
+.products-list
   display: flex
-  margin-right: -.5rem
-  margin-left: -.5rem
+  flex-wrap: wrap
+  padding: 0 .5rem
+
+  &__item
+    flex: 1 1 40%
+    max-width: calc(50% - 0.5rem)
 </style>

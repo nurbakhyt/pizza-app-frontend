@@ -1,13 +1,13 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Products from '@/components/Products.vue';
+import Home from '@/components/Home.vue';
 import Product from '@/components/Product.vue';
 import productsModule from '@/store/products';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('Products.vue', () => {
+describe('Home.vue', () => {
   let actions, store, state;
 
   beforeEach(() => {
@@ -45,13 +45,13 @@ describe('Products.vue', () => {
   });
 
   it('invokes fetch (products) action when component mounted', () => {
-    shallowMount(Products, { store, localVue });
+    shallowMount(Home, { store, localVue });
 
     expect(actions.fetchProducts).toHaveBeenCalled();
   });
 
   it('presents the loaded products', () => {
-    const wrapper = mount(Products, { store, localVue });
+    const wrapper = mount(Home, { store, localVue });
 
     expect(wrapper.findAll(Product)).toHaveLength(state.ids.length);
   });
