@@ -41,6 +41,13 @@
           </button>
         </div>
       </div>
+
+      <div
+        v-if="isEmpty"
+        class="cart-alert"
+      >
+        Your basket is empty
+      </div>
     </div>
 
   </section>
@@ -51,10 +58,15 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Cart',
-  computed: mapGetters([
-    'cartProducts',
-    'productsById',
-  ]),
+  computed: {
+    ...mapGetters([
+      'cartProducts',
+      'productsById',
+    ]),
+    isEmpty() {
+      return Object.keys(this.cartProducts).length < 1;
+    },
+  },
   methods: mapActions([
     'add',
     'reduce',
@@ -69,11 +81,16 @@ $red: #b05656
 
 .cart-preview
   flex: 0 0 30%
-  display: none
   padding: 0 .5rem
+  top: 1rem
+  position: sticky
 
   @media screen and (min-width: 768px)
+    align-self: flex-start
     display: block
+
+.cart-alert
+  color: $red
 
 .cart-product
   border-bottom: 1px solid lighten($secondary-color, 50)

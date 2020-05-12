@@ -2,17 +2,25 @@
   <div id="app">
     <navbar/>
 
-    <router-view/>
+    <div class="container">
+      <cart/>
+
+      <main>
+        <router-view/>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
+import Cart from '@/components/Cart.vue';
 import Navbar from './components/Navbar.vue';
 
 export default {
   name: 'App',
   components: {
     Navbar,
+    Cart,
   },
 };
 </script>
@@ -39,4 +47,14 @@ body
   max-width: 720px
   margin: 0 auto
   padding: 0 .5rem
+
+.container
+  display: flex
+  flex-direction: row-reverse
+
+main
+  flex: 1 1 auto
+  display: flex
+  margin-right: -.5rem
+  margin-left: -.5rem
 </style>
