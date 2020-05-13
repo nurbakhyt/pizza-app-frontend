@@ -42,6 +42,15 @@ h3
   padding: 0 .5rem
 
   &__item
-    flex: 1 1 40%
-    max-width: calc(50% - 0.5rem)
+    flex: 1 1 auto
+    margin-bottom: 1rem
+
+    &:nth-child(2n+1)
+      margin-right: 0
+
+    @media screen and (min-width: 600px)
+      flex: 1 1 40%
+      margin-right: .5rem
+      max-width: calc(50% - 0.5rem)
+
 </style>

@@ -187,7 +187,7 @@ button[disabled]
   align-items: center
 
   &__form
-    width: 320px
+    max-width: 320px
 
   &__btn
     background-color: $brand-color

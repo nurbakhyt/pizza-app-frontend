@@ -13,7 +13,7 @@
         </p>
 
         <div class="cart-product__actions">
-          <div>
+          <div class="counter">
             <button
               class="cart-product__btn cart-product__btn--reduce"
               @click="reduce(productId)"
@@ -82,12 +82,13 @@ $red: #b05656
   top: 1rem
   position: sticky
 
-  @media screen and (min-width: 768px)
-    align-self: flex-start
-    display: block
-
 .cart-alert
   color: $red
+
+.counter
+  display: flex
+  justify-content: space-between
+  margin-bottom: 1rem
 
 .cart-product
   border-bottom: 1px solid lighten($secondary-color, 50)
@@ -98,14 +99,21 @@ $red: #b05656
   &__name
     margin-bottom: .25rem
     font-size: .875rem
+    word-break: break-all
 
   &__actions
     display: flex
+    flex-direction: column
     justify-content: space-between
 
+    @media screen and (min-width: 600px)
+      flex-direction: row
+
   &__quantity
-    line-height: 1.5rem
-    padding: 0 .5rem
+    line-height: 2rem
+
+    @media screen and (min-width: 600px)
+      padding: 0 .5rem
 
   &__btn
     background-color: lighten($secondary-color, 50)
@@ -115,8 +123,11 @@ $red: #b05656
     line-height: 1.5rem
     outline: none
     padding: 0
-    height: 1.5rem
-    width: 2rem
+    height: 2rem
+    width: 1.5rem
+
+    @media screen and (min-width: 600px)
+      width: 2rem
 
     &:hover,
     &:focus
@@ -137,6 +148,10 @@ $red: #b05656
       background-color: $red
       border-radius: 1rem
       color: white
+      width: 100%
+
+      @media screen and (min-width: 600px)
+        width: 2rem
 
       &:hover,
       &:focus

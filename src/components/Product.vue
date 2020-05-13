@@ -58,13 +58,8 @@ $sc: $secondary-color
   box-shadow: 0 1px 4px -2px lighten($sc, 60), 0 4px 8px -2px lighten($sc, 60)
   display: flex
   flex-direction: column
-  margin-right: .5rem
-  margin-bottom: 1rem
   overflow: hidden
   position: relative
-
-  &:nth-child(2n+1)
-    margin-right: 0
 
   &__image
     margin-bottom: 1rem
@@ -81,6 +76,7 @@ $sc: $secondary-color
     font-weight: 400
     line-height: 1.75rem
     margin-bottom: .5rem
+    word-break: break-all
 
   &__description
     color: lighten($secondary-color, 30)
